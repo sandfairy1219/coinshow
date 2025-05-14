@@ -15,19 +15,42 @@ async function getBitcoinPrice() {
         비트코인/BTC: ${formattedPrice}원<br>
         <span style="color:${percentColor}">전일 대비: ${formattedPercent}%</span>
     `;
-    console.log(`현재 비트코인 가격: ${formattedPrice} 원, 전일 대비: ${formattedPercent}%`);
 }
 
 const btcprice = document.querySelector('#btcprice');
 const load = document.querySelector('#load');
 load.addEventListener('click', () => {
     getBitcoinPrice();
+    getEthereumPrice();
 });
 
 // 5초마다 자동 새로고침
 setInterval(() => {
     getBitcoinPrice();
 }, 1000);
+setInterval(() => {
+    getEthereumPrice();
+}, 1000);
 
 // 페이지 로드시 한 번 실행
 getBitcoinPrice();
+
+async function getEthereumPrice() {
+    const url = 'https://api.upbit.com/v1/ticker?markets=KRW-ETH';
+    const response = await fetch(url);
+    const data = await response.json();
+    const price = data[0].trade_price;
+    const prevClose = data[0].prev_closing_price;
+    const changePercent = ((price - prevClose) / prevClose) * 100;
+
+    const formattedPrice = price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 });
+    const formattedPercent = changePercent.toFixed(2);
+
+    let percentColor = changePercent > 0 ? 'red' : (changePercent < 0 ? 'blue' : 'black');
+
+    ethprice.innerHTML = `
+        이더리움/ETH: ${formattedPrice}원<br>
+        <span style="color:${percentColor}">전일 대비: ${formattedPercent}%</span>
+    `;
+}
+const ethprice = document.querySelector('#ethprice');
