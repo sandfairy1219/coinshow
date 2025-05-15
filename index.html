@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="btcprice">비트코인 현재가 : </div>
-    <div id="ethprice">이더리움 현재가 : </div>
+    <div class="container">
+        <div class="header">코인 시세</div>
+        <div class="coin-list">
+            <div class="coin-item">
+                <span class="coin-name">비트코인</span>
+                <span class="coin-price" id="btcprice"></span>
+                <span class="price-change" id="btcchange"></span>
+            </div>
+            <div class="coin-item">
+                <span class="coin-name">이더리움</span>
+                <span class="coin-price" id="ethprice"></span>
+                <span class="price-change" id="ethchange"></span>
+            </div>
+            <!-- ... -->
+        </div>
+    </div>
     <button id="load">새로고침</button>
     <script src="index.js"></script>
 </body>

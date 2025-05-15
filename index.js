@@ -12,12 +12,15 @@ async function getBitcoinPrice() {
     let percentColor = changePercent > 0 ? 'red' : (changePercent < 0 ? 'blue' : 'black');
 
     btcprice.innerHTML = `
-        비트코인/BTC: ${formattedPrice}원<br>
+        ${formattedPrice}원<br>
+        `;
+    btcchange.innerHTML = `
         <span style="color:${percentColor}">전일 대비: ${formattedPercent}%</span>
     `;
 }
 
 const btcprice = document.querySelector('#btcprice');
+const btcchange = document.querySelector('#btcchange');
 const load = document.querySelector('#load');
 load.addEventListener('click', () => {
     getBitcoinPrice();
@@ -49,8 +52,12 @@ async function getEthereumPrice() {
     let percentColor = changePercent > 0 ? 'red' : (changePercent < 0 ? 'blue' : 'black');
 
     ethprice.innerHTML = `
-        이더리움/ETH: ${formattedPrice}원<br>
+        ${formattedPrice}원<br>
+        `;
+    ethchange.innerHTML = `
         <span style="color:${percentColor}">전일 대비: ${formattedPercent}%</span>
     `;
 }
 const ethprice = document.querySelector('#ethprice');
+
+
